@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>郑州房价—郑州小区房价</title>
+    
+    <script src="./third/jquery.min.js"></script>
+    <link rel="stylesheet" href="./third/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/findHome.css">
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/template-web.js"></script>
+</head>
+
+<body>
+    <div class="top">
+        <div class="top-nav" role="navigation">
+            <ul class="nav nav-tabs top-nav1">
+                <li role="presentation">
+                    <a href="index.html">首页</a>
+                </li>
+                <li role="presentation" class="active">
+                    <a href="twiceHome.html">二手房</a>
+                </li>
+                <li role="presentation">
+                    <a href="newHome.html">新房</a>
+                </li>
+                <li role="presentation">
+                    <a href="zufang.html">租房</a>
+                </li>
+                <li role="presentation">
+                    <a href="xiaoqu.html">小区</a>
+                </li>
+                <li role="presentation">
+                    <a href="person.html">经纪人</a>
+                </li>
+                <li role="presentation">
+                    <a href="baike.html">百科</a>
+                </li>
+                <li role="presentation">
+                    <a href="fabuHome.html">发布房源</a>
+                </li>
+            </ul>
+            <div class="top-nav2">
+                <i></i>
+                <a href="login.html" id="loginBtn" rel="nofollow">登录</a>
+                <span>/</span>
+                <a href="register.html" id="registerBtn" rel="nofollow">注册</a>
+            </div>
+        </div>
+        <div class="top-middle">
+            <div class="menu">
+
+            </div>
+            <div class="search">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="keywords" placeholder="热门搜索">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="btnSearch" type="button">查找</button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <div class="top-footer">
+            <div class="position">
+                <span>位置</span>
+                <a href="#" title="郑州小区区域">区域
+                </a>
+            </div>
+            <div class="place clear" id="city"></div>
+            <script id="city_temp" type="text/html">
+                {{each cities c}}
+                <a class="city_a" href="javascript:;" data-id="{{c.id}}">{{c.name}}</a>
+                {{/each}}
+            </script>
+            <div class="price clear">
+                <span class="price-s">均价</span>
+                <ul>
+                    <li>
+                        <a href="#" class="nofollow">
+                            <input type="checkbox" data-price=" < 10000 " class="checkbox">
+                            <span class="name">一万以下</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nofollow">
+                            <input type="checkbox" data-price=" between 10000 and 20000 " class="checkbox">
+                            <span class="name">1-2万</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nofollow">
+                            <input type="checkbox" data-price=" between 20000 and 30000 " class="checkbox">
+                            <span class="name">2-3万</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nofollow">
+                            <input type="checkbox" data-price=" between 30000 and 40000 " class="checkbox">
+                            <span class="name">3-4万</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nofollow">
+                            <input type="checkbox" data-price=" > 40000 " class="checkbox">
+                            <span class="name">4万以上</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="sort-by">
+            <ul class="d-flex">
+                <li class="sortby-list active"onclick="condation.orderBy='';search(condation);$(this).addClass('active').siblings().removeClass('active');">默认排序</li>
+                <li class="sortby-list" onclick="condation.orderBy='cm.perPrice';search(condation);$(this).addClass('active').siblings().removeClass('active');">小区均价</li>
+            </ul>
+        </div>
+        <div class="twice-home-list" id="xiaoquList">
+            <!-- <div class="twice-home-item d-flex">
+                <div class="twice-home-img col-md-3">
+                    <img src="./images/twice-home/twice-home1.jpg" alt="">
+                </div>
+                <div class="twice-home-detail fs14 d-flex col-md-9">
+                    <div>
+                        <h4 class="mb20">
+                            <a href="#" class="mr10">第一大街水月湾 3室2厅 365万</a>
+
+                        </h4>
+                        <p>
+                            <i class="twice-home-icon icon1"></i>第一大街水月湾 | 3室2厅 | 136平米 | 南 北 | 简装</p>
+                        <p>
+                            <i class="twice-home-icon icon2"></i>中楼层(共5层)板塔结合 - 天赋路</p>
+                        <p>
+                            <i class="twice-home-icon icon3"></i>1天以前发布</p>
+                    </div>
+                    <div class="twice-home-price text-right mt20">
+                        <h3 class="fs14 coldarkred">
+                            <span class="fs32 fb mr10">365</span>万</h3>
+                        <p class="twice-home-per-price">单价
+                            <span>26839</span> 元/平米</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <script type="text/html" id="xiaoquList_temp">
+            {{each xiaoqu x}}
+            <div class="twice-home-item d-flex">
+                <div class="twice-home-img col-md-3">
+                    <img src="{{x.img}}" alt="">
+                </div>
+                <div class="twice-home-detail fs14 d-flex col-md-9">
+                    <div>
+                        <h4 class="mb20">
+                            <a href="#" class="mr10">{{x.name}} </a>
+                        </h4>
+                        <p>
+                            <i class="twice-home-icon icon1"></i>带看量：{{x.viewNum}}</p>
+                        <p>
+                            <i class="twice-home-icon icon3"></i>区域：{{x.cname}} | {{x.buildTime}} 建造</p>
+                    </div>
+                    <div class="twice-home-price text-right mt20">
+                        <p class="twice-home-per-price">单价
+                            <span>{{x.perPrice}}</span> 元/平米</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </script>
+    </div>
+    <div class="footer">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+            </ul>
+        </nav>
+    </div>
+    <script src="./third/jquery.cookie.min.js"></script>
+    <script>
+        var condation = {
+            keywords: "",
+            cityId: "",
+            price: [],
+            orderBy:""
+        }
+        function setLogin() {
+            var userInfo = $.cookie("user");
+            if (userInfo) {
+                var userInfo = JSON.parse(userInfo);
+                $(".top-nav2").html(`
+                <i></i>
+                <a href="javascript:;" rel="nofollow">欢迎${userInfo.trueName || userInfo.account}</a>
+                <span>/</span>
+                <a href="${location.href}" rel="nofollow" onclick="logout()">退出</a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user", "", { expires: -1 });
+        }
+        setLogin();
+        function getCity() {
+            $.get("/xiaoqu/getCity").done(data => {
+                $("#city").html(template("city_temp", { cities: data.cities }))
+                $(".city_a").each(function (i, v) {
+                    $(v).click(function () {
+
+                        condation.cityId = $(v).data("id");
+                        console.log(condation);
+                        $(this).addClass("active").siblings().removeClass("active");
+                        $("#cityActive").html($(this).text())
+                        search(condation)
+                    })
+                })
+            })
+        }
+        function search(condation) {
+            $.get("/xiaoqu/search", { condation: JSON.stringify(condation) }).done(function (data) {
+                console.log(data);
+                $("#xiaoquList").html(template("xiaoquList_temp", { xiaoqu: data.xiaoqu }))
+                $(".footer").css({
+                    display:"none"
+                })
+            }).fail(err => {
+                throw err;
+            })
+        }
+        var pageNow = 1, pageSize = 3, count, countPage;
+        // 获取数据
+        function initList(index) {
+            $.ajax({
+                url: '/xiaoqu/getXiaoqu',
+                method: 'GET',
+                data: {
+                    pageSize: pageSize,
+                    pageNow: index || pageNow,
+                },
+                success: function (res) {
+                    console.log(res);
+                    count = res.count;
+                    if (index) {
+                        pageNow = index;
+                    }
+                    updateList(res.communities);
+                    initPageList();
+                }
+            })
+        }
+        // 更新主体数据 
+        function updateList(update) {
+            let main = '';
+            update.map(function (item, index) {
+                main += '<div class="twice-home-item d-flex">' +
+                    
+                    '<div class="twice-home-img col-md-3">' +
+                       
+                      '<img src="' + item.img + '" alt="">' +
+                    '</div>' +
+                    '<div class="twice-home-detail fs14 d-flex col-md-9">' +
+                    '<div>' +
+                    '<h4 class="mb20">' +
+                    '<a href="#" class="mr10">' + item.name + '</a>' +
+                    '</h4>' +
+                    '<p>' +
+                    '<i class="twice-home-icon icon1"></i>带看量：' + item.viewNum + '</p>' +
+                    '<p>' +
+                    '<i class="twice-home-icon icon3"></i>' + item.buildTime + '建造</p>' +
+                    '</div>' +
+                    '<div class="twice-home-price text-right mt20">' +
+                    '<p class="twice-home-per-price">单价' +
+                    '<span>' + item.perPrice + '</span> 元/平米</p>' +
+                    '</div>' +
+                    '</div>' +
+                  
+                    '</div>';
+            })
+            $('.twice-home-list').html(main);
+        }
+
+        // 更新分页
+        function initPageList() {
+            countPage = Math.ceil(count / pageSize);
+            var liList = '';
+            for (var i = 1; i <= countPage; i++) {
+                if (i == pageNow) {
+                    liList += '<li class="page-item active" data-index="' + i + '"><a class="page-link" href="javascript:;">' + i + '</a></li>';
+                } else {
+                    liList += '<li class="page-item" data-index="' + i + '"><a class="page-link" href="javascript:;">' + i + '</a></li>';
+                }
+            }
+            var res = '<li class="page-item page-fuhao" data-fangxiang="left">' +
+                '<a class="page-link" href="javascript:;" aria-label="Previous">' +
+                '<span aria-hidden="true">&laquo;</span>' +
+                '<span class="sr-only">Previous</span>' +
+                '</a>' +
+                '</li>' +
+                liList +
+                '<li class="page-item page-fuhao" data-fangxiang="right">' +
+                '<a class="page-link" href="javascript:;" aria-label="Next">' +
+                '<span aria-hidden="true">&raquo;</span>' +
+                '<span class="sr-only">Next</span>' +
+                '</a>' +
+                '</li>';
+            $('.pagination').html(res);
+        }
+        initList();
+        $('.pagination').on('click', '.page-item:not(.page-fuhao)', function () {
+            var index = $(this).attr('data-index');
+            initList(index);
+            $(document).scrollTop(0);
+        })
+
+        $('.pagination').on('click', '.page-fuhao', function () {
+            var fx = $(this).attr('data-fangxiang');
+            if (fx == 'left') {
+                if (pageNow == 1) {
+                    return false;
+                }
+                pageNow--;
+                initList(pageNow);
+                $(document).scrollTop(0);
+            } else {
+                if (pageNow == countPage) {
+                    return false;
+                }
+                pageNow++;
+                initList(pageNow);
+                $(document).scrollTop(0);
+            }
+        })
+        $(function () {
+            getCity();
+            $(".price input[type='checkbox']").each(function (i, v) {
+                $(v).click(function () {
+                    if ($(this).prop("checked") && condation.price.indexOf($(v).data("price")) == -1) {
+                        condation.price.push($(v).data("price"));
+                    } else if (!$(this).prop("checked") && condation.price.indexOf($(v).data("price")) > -1) {
+                        condation.price.splice(condation.price.indexOf($(v).data("price")), 1)
+                    }
+                    console.log(condation)
+                    search(condation)
+                })
+            })
+            $("#btnSearch").click(function(){
+                condation.keywords = $("#keywords").val();
+                console.log(condation)
+                search(condation);
+            })
+        })
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>买房</title>
+    
+    <script src="./third/jquery.min.js"></script>
+    <link rel="stylesheet" href="./third/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bhome.css">
+    <script src="./third/jquery.cookie.min.js"></script>
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/template-web.js"></script>
+    <script src="./third/moment-with-locales.js"></script>
+    <script src="./third/purl.min.js"></script>
+    <script src="./js/common/utils.js"></script>
+</head>
+
+<body>
+    <div class="top">
+        <div class="top-nav" role="navigation">
+            <ul class="nav nav-tabs top-nav1">
+                <li role="presentation">
+                    <a href="index.html">首页</a>
+                </li>
+                <li role="presentation" class="active">
+                    <a href="twiceHome.html">二手房</a>
+                </li>
+                <li role="presentation">
+                    <a href="newHome.html">新房</a>
+                </li>
+                <li role="presentation">
+                    <a href="zufang.html">租房</a>
+                </li>
+                <li role="presentation">
+                    <a href="xiaoqu.html">小区</a>
+                </li>
+                <li role="presentation">
+                    <a href="person.html">经纪人</a>
+                </li>
+                <li role="presentation">
+                    <a href="baike.html">百科</a>
+                </li>
+                <li role="presentation">
+                    <a href="fabuHome.html">发布房源</a>
+                </li>
+            </ul>
+            <div class="top-nav2">
+                <i></i>
+                <a href="login.html" id="loginBtn" rel="nofollow">登录</a>
+                <span>/</span>
+                <a href="register.html" id="registerBtn" rel="nofollow">注册</a>
+            </div>
+        </div>
+
+        <div class="content" id="content"></div>
+        <script type="text/html" id="content_temp">
+            <div class="twice-home-item d-flex information" style="margin: 50px auto 0;height:400px;">
+                <div class="twice-home-img col-md-4">
+                    <img src="{{house.img}}" width="100%" height="100%" alt="">
+                </div>
+                <div class="twice-home-detail fs14 d-flex col-md-8">
+                    <div>
+                        <h4 class="mb20">
+                            <a href="./bhome.html?id={{house.id}}" class="mr10">{{house.name}}</a>
+                        </h4>
+                        <p class="fs32 fb mr10">
+                            款式：{{house.roomType}}室{{house.hallType}}厅{{house.toiletType}}卫 建面 {{house.area}} 平方米 </p>
+                        <p>
+                            总价：{{house.price}}万/套 （{{house.registerTime | dateFormat "MM-dd"}}更新）</p>
+                        <p>
+                            特性：{{house.special || "暂无"}}</p>
+                        <p>
+                            房型：{{house.type}}</p>
+                        <p>
+                            市区：{{house.cname}}</p>
+                        <p>
+                            小区：{{house.cmname}}</p>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="">
+                        <button type="button" class="btn btn-outline-secondary btn-lg">联系电话：{{house.phone || "暂无"}}</button>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+    <script>
+        var id = $.url().data.param.query.id;
+        function setLogin() {
+            var userInfo = $.cookie("user");
+            if (userInfo) {
+                var userInfo = JSON.parse(userInfo);
+                $(".top-nav2").html(`
+                <i></i>
+                <a href="javascript:;" rel="nofollow">欢迎${userInfo.trueName || userInfo.account}</a>
+                <span>/</span>
+                <a href="${location.href}" rel="nofollow" onclick="logout()">退出</a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user", "", { expires: -1 });
+        }
+        setLogin();
+        console.log($.url())
+        function getDetail(id) {
+            $.get("/house/getHouse/" + id).done(data => {
+                $("#content").html(template("content_temp", { house: data.house }))
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            getDetail(id)
+        })
+
+    </script>
+</body>
+
+</html>

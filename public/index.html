@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页</title>
+    <link rel="stylesheet" href="./css/zhuye.css">
+    <link rel="stylesheet" href="./css/animate.css">
+    <script src="./third/jquery.min.js"></script>
+    <script src="./third/jquery.cookie.min.js"></script>
+    <script src="./third/template-web.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="top">
+            <div class="wrapper">
+                <div class="f1 clearfix">
+                    <a href="#" title="郑州房屋销售出租网" class="logo" target="_self">
+                        <h1 class="index_h1">郑州房屋销售出租网</h1>
+                    </a>
+                    <span class="exchange">
+                        <i></i>
+                        郑州
+                    </span>
+                </div>
+                <div class="fr clearfix ">
+                    <div class="ti-hover banner-bg ">
+                        <div class="typeShowUser">
+                            <i></i>
+                            <span class="welcome">
+                                <a class="btn-login bounceIn actLoginBtn" href="./login.html">
+                                    <span class="reg">登录</span>
+                                </a>
+                                <a class="btn-register" href="./register.html">
+                                    <span class="log">立即注册</span>
+                                </a>
+                            </span>
+                        </div>
+
+                        <ul>
+                            <li>
+                                <a class="" href="./twiceHome.html">二手房</a>
+                            </li>
+                            <li>
+                                <a class="" href="./newHome.html">新房</a>
+                            </li>
+                            <li>
+                                <a class="" href="./zufang.html">租房</a>
+                            </li>
+                            <li>
+                                <a class="" href="./xiaoqu.html">小区</a>
+                            </li>
+                            <li>
+                                <a class="" href="./person.html">经纪人</a>
+                            </li>
+                            <li>
+                                <a class="" href="./baike.html">百科</a>
+                            </li>
+                            <li class="real">
+                                <i></i>
+                                <a class="" href="./fabuHome.html" target="_blank">发布房源</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="header-wrap">
+                <div class="wrap-ico">
+
+                </div>
+                <div class="house-num">
+                    <ui>
+                        <li style="height:35px; font-size: 35px; ">来这里，你可以找到一个温馨的家</li>
+                    </ui>
+                </div>
+                <div class="search-box-wrap" style="margin-top: 40px;">
+                    <div class="search-box-con">
+                        <div class="menu">
+                            <ul class="clearfix">
+                                <li class="tab check" data-operatetype="2">
+                                    <span>找二手房</span>
+                                </li>
+                                <li class="tab" data-operatetype="1">
+                                    <span>找新房</span>
+                                </li>
+                                <li class="tab" data-operatetype="0">
+                                    <span>找租房</span>
+                                </li>
+                                <li class="tab toxiaoqu" data-operatetype="3">
+                                    <span>
+                                        <a href="./xiaoqu.html" style="color:#fff">找小区</a>
+                                    </span>
+                                </li>
+                            </ul>
+                            <i id="triangle" style="left:65px;"></i>
+                        </div>
+                        <div class="search clear">
+                            <div class="search-in">
+                                <div class="searchBox" data-action='/ershoufang/rs'>
+                                    <input class="text left txt searchVal autoSuggest" name="keyword" autocomplete="off" placeholder="请输入区域、商圈或小区名开始找房" id="keywords">
+
+                                    <input class="btn home-ico ico-search left" id="btnSearch" type="button" value="开始找房" daty-id="410100" style="position: relative; left: 0
+                                    
+                                    px;top: 0;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-nav">
+            <ul class="count-3 clearfix">
+                <li class="hvr-bob">
+                    <a href="newHome.html">
+                        <img src="./images/php4TtmtO.png">
+                        <b>新房</b>
+                        <p>地铁周围房源，让您出行畅通无阻 交通便利</p>
+                    </a>
+                </li>
+                <li class="hvr-bob">
+                    <a href="twiceHome.html">
+                        <img src="./images/phpe022WE.png">
+                        <b>二手房</b>
+                        <p>您来指我来找，转成为您提供条件 筛选比较</p>
+                    </a>
+                </li>
+                <li class="hvr-bob">
+                    <a href="zufang.html">
+                        <img src="./images/phphnmv10.png">
+                        <b>租房</b>
+                        <p>期望的价位内，寻找最合适的房子 价格适中</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="contentBox">
+            <div class="ershoufang" id="ershoufanglist" log-mod="site_ershoufang">
+                <div class="clearfix">
+                    <div class="fl clearfix">
+                        <div class="name-bg">
+                            <div class="name"></div>
+                        </div>
+                        <p>好房源那么多，我们为你精选
+                            <a href="./twiceHome.html">更多郑州二手房</a>
+                        </p>
+                    </div>
+                    <div>
+                        <ul class="d-flex clearfix mt20" id="ershouList"></ul>
+                        <script id="ershouList_temp" type="text/html">
+                        {{each ershou e}}
+                        <li class="ershouRecommendList LOGCLICKDATA">
+                            <a href="/bhome.html?id={{e.id}}" target="_blank" class="LOGCLICK">
+                                <div class="wra">
+                                    <img src="{{e.img}}" onerror="null;src='./images/default_pic3.jpg'" alt="{{e.special}}">
+                                    <span class="good_house_icon"></span>
+                                    <div class="bottom">
+                                        <p class="position">
+                                            {{e.name}}
+                                        </p>
+                                        <p class="position">{{e.cname}}{{e.cmname}}</p>
+                                        <p class="tips">
+                                            <span>{{e.roomType}}室{{e.hallType}}厅·{{e.toiletType}}平米</span>
+                                            <span class="tips-price">{{e.price}}万</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </script>
+                    </div>
+                </div>
+            </div>
+            <div class="xiaoqu-list" id="modXiaoqu" <div class="clearfix">
+                <div class="fl clearfix">
+                    <div class="name"></div>
+                    <p>纵览小区，恋上这座城
+                        <a href="./xiaoqu.html">更多郑州小区</a>
+                    </p>
+                </div>
+                <div class="xiaoqu-list">
+                    <ul class="xiaoqulist" id="xiaoquList"></ul>
+                    <script type="text/html" id="xiaoquList_temp">
+                    {{each xiaoqu x}}
+                    <li>
+                        <a href="#" target="_blank">
+                            <img src="{{x.img}}" onerror="null;src='./images/default_pic3.jpg'" alt="{{x.special}}">
+                            <div class="title">
+                                <div class="resblock-name">
+                                    {{x.name}}
+                                </div>
+                                <div class="resblock-desc">
+                                    <span>
+                                        <label>{{x.perPrice}}</label>元/平
+                                    </span>
+                                    <span class="resblock-year">{{x.buildTime}}年建</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {{/each}}
+                </script>
+                </div>
+            </div>
+            <div class="new-house">
+                <div class="clearfix">
+                    <div class="fl clearfix">
+                        <div class="name-bg">
+                            <div class="name"></div>
+                        </div>
+                        <p>真实信息准确同步，楼盘动态一手掌握
+                            <a href="./newHome.html" target="_blank">更多郑州新房</a>
+                        </p>
+                    </div>
+                    <div class="newhose-list">
+                        <ul id="newhouseList"></ul>
+                        <script id="newhouseList_temp" type="text/html">
+                            {{each newhouse n}}
+                            <li>
+                                <a href="/bhome.html?id={{n.id}}">
+                                    <img src="{{n.img}}" onerror="null;src='./images/default_pic3.jpg'" alt="{{n.special}}">
+                                    <div class="bg"></div>
+                                    <div class="title">
+                                        {{n.name}}
+                                        <span>
+                                            <label>{{n.perPrice}}</label>元/平
+                                        </span>
+                                    </div>
+                                    <div class="title01">
+                                        <span title="文化路与贾鲁河交汇处两岸">{{n.city}}{{n.communities}}{{}}</span>
+                                    / {{n.area}}平米</div>
+                                </a>
+                            </li>
+                            {{/each}}
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLoginIn() {
+            var userInfo = $.cookie("user");
+            console.log(userInfo)
+            if (userInfo) {
+                userInfo = JSON.parse(userInfo);
+                $(".welcome").html(`
+                    <a class="btn-login bounceIn actLoginBtn" href="javascript:;">
+                        <span class="reg">欢迎${userInfo.trueName || userInfo.account}</span>
+                    </a>
+                    <a class="btn-register" href="/" onclick="logout()">
+                        <span class="log">退出</span>
+                    </a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user", "", { expires: -1 });
+        }
+        function getHouse(operateType, pageSize, pageNow) {
+            $.get("/house/getHouses/" + operateType, { pageSize, pageNow }).done(function (data) {
+                console.log(data);
+                if (data.code != 200) {
+                    $(".contentBox").html("没有房源信息");
+                    return;
+                }
+                if (operateType == 2) {
+                    $("#ershouList").html(template("ershouList_temp", { ershou: data.houses }))
+                } else if (operateType == 1) {
+                    $("#newhouseList").html(template("newhouseList_temp", { newhouse: data.houses }))
+                }
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function getXiaoqu(pageSize, pageNow) {
+            $.get("/xiaoqu/getXiaoqu", { pageSize, pageNow }).done(function (data) {
+                console.log(data);
+                if (data.code != 200) {
+                    $(".contentBox").html("没有房源信息");
+                    return;
+                }
+                $("#xiaoquList").html(template("xiaoquList_temp", { xiaoqu: data.communities }))
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            getHouse(2, 4, 1);
+            getHouse(1, 3, 1);
+            getXiaoqu(3, 1);
+            setLoginIn();
+            $(".tab").each(function (i, v) {
+                $(v).click(function () {
+                    $(this).addClass("check").siblings().removeClass("check");
+                    $("#triangle").css({
+                        left: (i + 1) * 65 + "px"
+                    })
+                })
+            })
+            $("#btnSearch").click(function () {
+                var keywords = $("#keywords").val();
+                var operateType = $(".tab.check").data("operatetype");
+                // console.log("./searchPage.html?keywords=" + keywords + "&operateType=" + operateType)
+                location.href = "./searchPage.html?keywords=" + keywords + "&operateType=" + operateType
+            })
+        })
+
+    </script>
+</body>
+
+</html>

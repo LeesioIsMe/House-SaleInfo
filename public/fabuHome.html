@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>发布房源</title>
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/fabuHome.css">
+    <link rel="stylesheet" href="./third/bootstrap.min.css">
+    <link rel="stylesheet" href="./third/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./third/webuploader/webuploader.css">
+    <script src="./third/jquery.min.js"></script>
+    <script src="./third/jquery.cookie.min.js"></script>
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/template-web.js"></script>
+    <script src="./third/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="banner-bg">
+            <div class="container banner d-flex">
+                <ul class="nav-list d-flex my-nav-list">
+                    <li>
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="twiceHome.html">二手房</a>
+                    </li>
+                    <li class="">
+                        <a href="newHome.html">新房</a>
+                    </li>
+                    <li class="">
+                        <a href="zufang.html">租房</a>
+                    </li>
+                    <li class="">
+                        <a href="fabuHome.html" target="_blank">发布房源</a>
+                    </li>
+                </ul>
+                <div class="user-option">
+                    <a class="btn btn-sm btn-outline-secondary" href="login.html">登录</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="register.html">注册</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-adver">
+            <div class="top-adver mb20">
+                <h4 class="text-center">欢迎业主发布房源</h4>
+            </div>
+            <div class="bottom-adver">
+                <p class="text-center">您所发布的每一个房源，都将为其他人提供一个寻找温暖的机会</p>
+            </div>
+        </div>
+        <div class="fabu">
+            <form id="fabuForm" style="position: relative;">
+                <img src="" id="imgPreview" style="position: absolute;left:400px;top:0;" width="100px" height="100px" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                    alt="">
+                <div class="form-group d-flex fs14">
+                    <label for="community">
+                        <b>小区*</b>
+                    </label>
+                    <select class="select-list" name="community" id="community"></select>
+                    <script id="community_temp" type="text/html">
+                        {{each communities c}}
+                        <option value="{{c.id}}">{{c.name}}</option>
+                        {{/each}}
+                    </script>
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="img">
+                        <b>图片</b>
+                    </label>
+                    <div id="filePicker">选择图片</div>
+                    <input type="text" style='display:none;' val="" id="imgPath" name="imgPath">
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="position">
+                        <b>定位*</b>
+                    </label>
+                    <select class="select-list" name="operateType" id="position">
+                        <option value="0">租房</option>
+                        <option value="1">新房</option>
+                        <option value="2">二手房</option>
+                    </select>
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="city">
+                        <b> 区域*</b>
+                    </label>
+                    <select class="select-list" name="city" id="city"></select>
+                    <script id="city_temp" type="text/html">
+                        {{each cities c}}
+                        <option value="{{c.id}}">{{c.name}}</option>
+                        {{/each}}
+                    </script>
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="area">
+                        <b>面积*</b>
+                    </label>
+                    <input type="text" class="community" name="area" id="area" aria-describedby="helpId" placeholder="请输入面积大小">
+                    <label>平方米</label>
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="house-type">
+                        <b>户型*</b>
+                    </label>
+                    <select class="select-list" name="roomType" id="house-type">
+                        <option value="1">1室</option>
+                        <option value="2">2室</option>
+                        <option value="3">3室</option>
+                        <option value="4">4室</option>
+                        <option value="5">5室</option>
+                        <option value="6">6室</option>
+                        <option value="7">7室</option>
+                        <option value="8">8室</option>
+                        <option value="9">9室</option>
+                    </select>
+                    <select class="select-list" name="hallType" id="hall-type">
+                        <option value="1">1厅</option>
+                        <option value="2">2厅</option>
+                        <option value="3">3厅</option>
+                        <option value="4">4厅</option>
+                        <option value="5">5厅</option>
+                        <option value="6">6厅</option>
+                        <option value="7">7厅</option>
+                        <option value="8">8厅</option>
+                        <option value="9">9厅</option>
+                    </select>
+                    <select class="select-list" name="toiletType" id="toilet-type">
+                        <option value="1">1卫</option>
+                        <option value="2">2卫</option>
+                        <option value="3">3卫</option>
+                        <option value="4">4卫</option>
+                        <option value="5">5卫</option>
+                        <option value="6">6卫</option>
+                        <option value="7">7卫</option>
+                        <option value="8">8卫</option>
+                        <option value="9">9卫</option>
+                    </select>
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="type">
+                        <b>类型*</b>
+                    </label>
+                    <select class="select-list" name="type" id="type">
+                        <option value="住宅">住宅</option>
+                        <option value="别墅">别墅</option>
+                        <option value="商业">商业</option>
+                        <option value="写字楼">写字楼</option>
+                        <option value="底商">底商</option>
+                    </select>
+                </div>
+                <div class="form-group d-flex fs14">
+                    <label for="price">
+                        <b>价格*</b>
+                    </label>
+                    <input type="text" class="community" name="price" id="price" aria-describedby="helpId" placeholder="价格">
+                    <label>万元</label>
+                </div>
+                <div class="form-group special d-flex fs14">
+                    <label for="special">
+                        <b>特色</b>
+                    </label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="subway" id="" value="地铁旁"> 地铁旁
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="newdec" id="" value="新装修"> 新装修
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="schhom" id="" value="学区房"> 学区房
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" id="btnSubmit" class="btn btn-primary btn-sm">确认发布</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        房源信息填写有误或资料填写不完整
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        发布成功
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var imgPath = "";
+        function setLogin() {
+            var userInfo = $.cookie("user");
+            if (userInfo) {
+                var userInfo = JSON.parse(userInfo);
+                $(".user-option").html(`
+                <a class="btn btn-sm btn-outline-secondary" href="javascript:;">欢迎${userInfo.trueName || userInfo.account}</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="${location.href}" onclick="logout()">退出</a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user","",{expires:-1});
+        }
+        function getXiaoqu() {
+            $.get("/xiaoqu/getXiaoqu").done(data => {
+                $("#community").html(template("community_temp", { communities: data.communities }))
+            })
+        }
+        function getCity() {
+            $.get("/xiaoqu/getCity").done(data => {
+                $("#city").html(template("city_temp", { cities: data.cities }))
+            })
+        }
+        $(function () {
+            getXiaoqu();
+            getCity();
+            setLogin();
+            var BASE_URL = "http://localhost:3000";
+            var uploader = WebUploader.create({
+                auto: true,
+                swf: BASE_URL + '/third/webuploader/Uploader.swf',
+                server: BASE_URL + "/upload/uploadImg",
+                pick: '#filePicker',
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
+            });
+            uploader.on('uploadSuccess', function (file, response) {
+                $('#' + file.id).addClass('upload-state-done');
+                imgPath = response.imgPath;
+                $("#imgPath").val(imgPath);
+                $("#imgPreview").attr("src", imgPath);
+            });
+            $("#btnSubmit").click(function (e) {
+                e.preventDefault();
+                console.log($("#fabuForm").serialize())
+                $.post("/house/fabu", $("#fabuForm").serialize()).done(function (data) {
+                    if (data.code != 200) {
+                        $("#error").modal("show");
+                        return;
+                    }
+                    $("#success").modal("show");
+                })
+            })
+            $("#success").on("hide.bs.modal", function () {
+                // location.reload();
+            })
+        })
+    </script>
+</body>
+
+</html>

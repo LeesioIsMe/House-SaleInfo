@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>郑州市房屋销售出租网站</title>
+    
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="/third/bootstrap.min.css">
+    <script src="./third/jquery.min.js"></script>
+    <script  src="./third/jquery.cookie.min.js"></script>
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/template-web.js"></script>
+    <script src="./js/common/utils.js"></script>
+    <link rel="stylesheet" href="./third/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="blog-header py-3 baner-bg">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="text-muted selected p-2 " href="index.html">首页</a>
+                </div>
+                <div class="col-4 text-center">
+
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center user-option">
+                    <a class="btn btn-sm btn-outline-secondary" href="login.html">登录</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="register.html">注册</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="nav-scroller py-1 mb-2 baner-bg">
+            <nav class="nav d-flex justify-content-between">
+                <a class="p-2 text-muted selected" href="newHome.html">新房</a>
+                <a class="p-2 text-muted selected" href="twiceHome.html">二手房</a>
+                <a class="p-2 text-muted selected" href="zufang.html">出租房</a>
+                <a class="p-2 text-muted selected" href="fabuHome.html">发布房源</a>
+            </nav>
+        </div>
+
+        <div class="filter">
+            <div class=" p-3 text-white rounded bg-dark banner-bg row">
+                <div class="left-bg">
+                </div>
+                <div class="col-md-2">
+                    <div>
+                        <div class="form-group" style="position: relative;">
+                            <input type="text" class="form-control" name="" id="keywords" aria-describedby="helpId" placeholder="地区、小区关键字">
+                            <i class="fa fa-search" id="btnSearch" style="position: absolute;right:-30px;top:10px;cursor: pointer;z-index: 100;" aria-hidden="true"></i>
+                        </div>
+                        <p>试试条件找房：</p>
+                        <div class="filter-list">
+                            <div class="form-group filter-area">
+                                <select class="select-list form-control" name="city" id="city"></select>
+                                <script id="city_temp" type="text/html">
+                                    <option value="">区域</option>
+                                    {{each cities c}}
+                                    <option value="{{c.id}}">{{c.name}}</option>
+                                    {{/each}}
+                                </script>
+                            </div>
+                            <div class="form-group filter-area">
+                                <select class="select-list form-control" name="type" id="type">
+                                    <option value="">类型</option>
+                                    <option value="住宅">住宅</option>
+                                    <option value="别墅">别墅</option>
+                                    <option value="商业">商业</option>
+                                    <option value="写字楼">写字楼</option>
+                                    <option value="底商">底商</option>
+                                </select>
+                            </div>
+                            <div class="form-group filter-area">
+                                <select class="select-list form-control" name="roomType" id="roomType">
+                                    <option value="">卧室</option>
+                                    <option value=" = 1 ">1室</option>
+                                    <option value=" = 2 ">2室</option>
+                                    <option value=" = 3 ">3室</option>
+                                    <option value=" = 4 ">4室</option>
+                                    <option value=" = 5 ">5室</option>
+                                    <option value=" = 6 ">6室</option>
+                                    <option value=" = 7 ">7室</option>
+                                    <option value=" = 8 ">8室</option>
+                                    <option value=" = 9 ">9室</option>
+                                </select>
+                            </div>
+                            <div class="form-group filter-area">
+                                <select class="form-control" name="price" id="price">
+                                    <option value="">
+                                        <label for="checkbox">价格</label>
+                                    </option>
+                                    <option value="< 60">
+                                        <label for="checkbox">60万以下</label>
+                                    </option>
+                                    <option value=" between 60 and 80 ">
+                                        <label for="checkbox">60-80万</label>
+                                    </option>
+                                    <option value=" between 80 and 100 ">
+                                        <label for="checkbox">80-100万</label>
+                                    </option>
+                                    <option value=" between 10 and 150 ">
+                                        <label for="checkbox">100-150万</label>
+                                    </option>
+                                    <option value=" between 150 and 200 ">
+                                        <label for="checkbox">150-200万</label>
+                                    </option>
+                                    <option value=" between 200 and 300 ">
+                                        <label for="checkbox">200-300万</label>
+                                    </option>
+                                    <option value=" between 300 and 400 ">
+                                        <label for="checkbox">300-400万</label>
+                                    </option>
+                                    <option value=" > 400 ">
+                                        <label for="checkbox">400万以上</label>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" id="btnCondationSearch" class="btn btn-primary btn-sm">确定</button>
+                                <button type="button" id="btnReset" class="btn btn-secondary btn-sm">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-8 px-0">
+                    <h1 class="display-4 font-italic">精品真实房源，等你来订购</h1>
+                    <p class="lead my-3">在这里，为你寻觅一个家</p>
+                    <p class="lead mb-0">
+                        <a href="index.html" class="text-white font-weight-bold">在线找新房，就来郑州市房屋销售出租网</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="originList">
+            <div class="jingxuan-loupan">
+                <h2 class="mb-4 text-center">精选楼盘</h2>
+                <div class="jingxuan-page-list" id="jingxuan"></div>
+                <script type="text/html" id="jingxuan_temp">
+                <div class="row jingxuan-page mb-2">
+                    {{each jingxuan j i}}
+                        {{if i>=0 && i<4 }}
+                        <div class="col-md-6">
+                            <div class="card flex-md-row mb-4 box-shadow h-md-250 p-md-3">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <h3 class="mb-0">
+                                        <a class="text-dark" href="./bhome.html?id={{j.id}}">{{j.cmname}}</a>
+                                    </h3>
+                                    <strong class="d-inline-block mb-2 text-success">{{j.special}} </strong>
+                                    <div class="mb-1 text-muted">{{j.cname}}</div>
+                                    <p class="card-text mb-auto">建面 {{j.area}}m²</p>
+                                    <a href="#">均价 {{j.price/j.area | priceFormat "￥"}} 元/平</a>
+                                </div>
+                                <a href="./bhome.html?id={{j.id}}">
+                                    <img class="card-img-right flex-auto d-none d-md-block" src="{{j.img}}" onerror="null;src='./images/default_pic3.jpg'" width="180px" height="180px" alt="Card image cap">
+                                </a> 
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="row jingxuan-page mb-2 hidden">
+                    {{each jingxuan j i}}
+                        {{if i>=4 && i<8 }}
+                        <div class="col-md-6">
+                            <div class="card flex-md-row mb-4 box-shadow h-md-250 p-md-3">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <h3 class="mb-0">
+                                        <a class="text-dark" href="./bhome.html?id={{j.id}}">{{j.cmname}}</a>
+                                    </h3>
+                                    <strong class="d-inline-block mb-2 text-success">{{j.special}} </strong>
+                                    <div class="mb-1 text-muted">{{j.cname}}</div>
+                                    <p class="card-text mb-auto">建面 {{j.area}}m²</p>
+                                    <a href="#">均价 {{j.price/j.area | priceFormat "￥"}} 元/平</a>
+                                </div>
+                                <a href="./bhome.html?id={{j.id}}">
+                                    <img class="card-img-right flex-auto d-none d-md-block" src="{{j.img}}" onerror="null;src='./images/default_pic3.jpg'" width="180px" height="180px" alt="Card image cap">
+                                </a> 
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="row jingxuan-page mb-2 hidden">
+                    {{each jingxuan j i}}
+                        {{if i>=8 && i<12 }}
+                        <div class="col-md-6">
+                            <div class="card flex-md-row mb-4 box-shadow h-md-250 p-md-3">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <h3 class="mb-0">
+                                        <a class="text-dark" href="./bhome.html?id={{j.id}}">{{j.cmname}}</a>
+                                    </h3>
+                                    <strong class="d-inline-block mb-2 text-success">{{j.special}} </strong>
+                                    <div class="mb-1 text-muted">{{j.cname}}</div>
+                                    <p class="card-text mb-auto">建面 {{j.area}}m²</p>
+                                    <a href="#">均价 {{j.price/j.area | priceFormat "￥"}} 元/平</a>
+                                </div>
+                                <a href="./bhome.html?id={{j.id}}">
+                                    <img class="card-img-right flex-auto d-none d-md-block" src="{{j.img}}" onerror="null;src='./images/default_pic3.jpg'" width="180px" height="180px" alt="Card image cap">
+                                </a> 
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+        
+            </script>
+                <div class="jingxuan-pager">
+                    <a href="javascript:;" class="pager active"></a>
+                    <a href="javascript:;" class="pager"></a>
+                    <a href="javascript:;" class="pager"></a>
+                </div>
+            </div>
+            <div class="recommend-loupan">
+                <h2 class="mb-4 text-center">推荐楼盘</h2>
+                <p class="text-left fs14">在售楼盘
+                    <span class="sale-num">20</span> 个</p>
+                <div class="row mb-2 loupan-list" id="recommend"></div>
+                <script type="text/html" id="recommend_temp">
+                {{each recommend r i}}
+                    {{ if ( i < limit ) }}
+                    <div class="col-md-4 loupan-item">
+                        <div class="card mb-4 h-md-250 mycard">
+                            <div class="card-body d-flex flex-column align-items-start" style="position:relative; background-image: url({{r.img}}),url(./images/default_pic3.jpg);background-size: cover;background-repeat: no-repeat; height:400px;">
+                                <div class="discount">
+                                    <span class="text-white">{{r.special}}</span>
+                                </div>
+                                <a href="./bhome.html?id={{r.id}}">
+                                    <h3 class="d-inline-block mb-2 text-white loupan-name">{{r.cmname}}</h3>
+                                </a>
+                                <div class="mb-1 text-white loupan-position">
+                                    <i class="icon-position"></i>
+                                    <span class="area">【{{r.cname}}】</span>
+                                    <span class="address">{{r.cmname}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex loupan-info">
+                                <p class="loupan-price">均价
+                                    <span class="price-detail">{{r.price/r.area | priceFormat " "}} 元/平</span>
+                                </p>
+                                <p class="loupan-type" href="#">{{r.special}}</p>
+                            </div>
+                            <p class="loupan-size card-text mb-auto">建面 {{r.area}}㎡</p>
+                        </div>
+                    </div>
+                    {{/if}}
+                {{/each}}
+            </script>
+                <div class="more" id="lookMore">
+                    <p class="text-center fs14">
+                        <a href="javascript:;">查看更多</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="searchResult"></div>
+        <script type="text/html" id="searchResult_temp">
+            <div class="recommend-loupan">
+                <h2 class="mb-4 text-center">搜索结果</h2>
+                <p class="text-left fs14">共有
+                    <span class="sale-num" id="totalNum">20</span> 个</p>
+                <div class="row mb-2 loupan-list">
+                {{each houses h}}
+                    <div class="col-md-4 loupan-item">
+                        <div class="card mb-4 h-md-250 mycard">
+                            <div class="card-body d-flex flex-column align-items-start" style="position:relative; background-image: url({{h.img}}),url(./images/default_pic3.jpg);background-size: cover;background-repeat: no-repeat; height:400px;">
+                                <div class="discount">
+                                    <span class="text-white">{{h.special}}</span>
+                                </div>
+                                <h3 class="d-inline-block mb-2 text-white loupan-name">{{h.cmname}}</h3>
+                                <div class="mb-1 text-white loupan-position">
+                                    <i class="icon-position"></i>
+                                    <span class="area">【{{h.cname}}】</span>
+                                    <span class="address">{{h.cmname}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex loupan-info">
+                                <p class="loupan-price">均价
+                                    <span class="price-detail">{{h.price/h.area | priceFormat " "}} 元/平</span>
+                                </p>
+                                <p class="loupan-type" href="#">{{h.special}}</p>
+                            </div>
+                            <p class="loupan-size card-text mb-auto">建面 {{h.area}}㎡</p>
+                        </div>
+                    </div>
+                {{/each}}
+                </div>
+            </div>
+        </script>
+    </div>
+    <script>
+        var condation = {
+            cityId: "",
+            communityId: "",
+            price: [],
+            area: [],
+            roomType: [],
+            special: [],
+            type: [],
+            orderby: "",
+            keywords: "",
+            operateType: 1,
+        };
+        function setLogin() {
+            var userInfo = $.cookie("user");
+            if (userInfo) {
+                var userInfo = JSON.parse(userInfo);
+                $(".user-option").html(`
+                <a class="btn btn-sm btn-outline-secondary" href="javascript:;">欢迎${userInfo.trueName || userInfo.account}</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="${location.href}" onclick="logout()">退出</a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user","",{expires:-1});
+        }
+        setLogin();
+        function search(condation) {
+            $.post("/search", {
+                condation: JSON.stringify(condation),
+            }).done(data => {
+                console.log(data);
+                if (data.code != 200) {
+                    $("#searchResult").html("没有找到对应的房源信息");
+                    return;
+                }
+                $("#searchResult").html(template("searchResult_temp", { houses: data.houses }));
+                $("#totalNum").text(data.houses.length);
+                $("#originList").addClass("hidden")
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function getNewHouses(type) {
+            var orderBy = "";
+            if (type == "jingxuan") {
+                orderBy = "perPrice"
+            }
+            $.get("/house/getHouses/1", { orderBy: orderBy, pageNow: 1, pageSize: 12 }).done(function (data) {
+                console.log(data)
+                if (data.code != 200) {
+                    $("#jingpin").html("暂无数据")
+                    return;
+                }
+                if (type == "jingxuan") {
+                    $("#jingxuan").html(template("jingxuan_temp", { jingxuan: data.houses }))
+                }
+                if (type == "recommend") {
+                    $("#recommend").html(template("recommend_temp", { recommend: data.houses, limit: 6 }))
+                }
+            })
+        }
+        function getCity() {
+            $.get("/xiaoqu/getCity").done(data => {
+                console.log(data)
+                $("#city").html(template("city_temp", { cities: data.cities }))
+                $(".city_a").each(function (i, v) {
+                    $(v).click(function () {
+                        condation.cityId = $(v).data("id");
+                        console.log(condation);
+                        $(this).addClass("active").siblings().removeClass("active");
+                        $("#cityActive").html($(this).text())
+                    })
+                })
+            })
+        }
+        $(function () {
+            getCity();
+            getNewHouses("jingxuan");
+            getNewHouses("recommend");
+            $(".pager").each(function (i, v) {
+                $(v).mouseover(function () {
+                    $(".jingxuan-page").eq(i).removeClass("hidden").siblings().addClass("hidden");
+                    $(v).addClass("active").siblings().removeClass("active");
+                })
+            })
+            $("#lookMore").click(function () {
+                $.get("/house/getHouses/1").done(function (data) {
+                    console.log(data)
+                    if (data.code != 200) {
+                        $("#recommend").html("暂无数据")
+                        return;
+                    }
+                    $("#recommend").html(template("recommend_temp", { recommend: data.houses, limit: 17 }))
+                    $("#lookMore").addClass("hidden");
+                })
+            })
+            $("#btnSearch").click(function () {
+                var keywords = $("#keywords").val();
+                condation.keywords = keywords;
+                console.log(condation)
+                search(condation);
+            })
+            $("#city").change(function () {
+                var val = $(this).val();
+                if (val) condation.cityId = $(this).val() - 0;
+                console.log(condation)
+            })
+            $("#type").change(function () {
+                var val = $(this).val();
+                condation.type = [];
+                if (val) condation.type.push("'" + $(this).val() + "'");
+                console.log(condation)
+            })
+            $("#roomType").change(function () {
+                var val = $(this).val();
+                condation.roomType = [];
+                if (val) condation.roomType.push($(this).val());
+                console.log(condation)
+            })
+            $("#price").change(function () {
+                var val = $(this).val();
+                condation.price = [];
+                if (val) condation.price.push($(this).val());
+                console.log(condation)
+            })
+            $("#btnCondationSearch").click(function () {
+                search(condation);
+            })
+            $("#btnReset").click(function () {
+                condation = {
+                    cityId: "",
+                    communityId: "",
+                    price: [],
+                    area: [],
+                    roomType: [],
+                    special: [],
+                    type: [],
+                    orderby: "",
+                    keywords: "",
+                    operateType: 1,
+                };
+                $("#originList").removeClass("hidden");
+                $("#searchResult").html("");
+            })
+        })
+    </script>
+</body>
+
+</html>

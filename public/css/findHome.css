@@ -1,0 +1,228 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.top-nav{
+   
+    font-size: 16px !important;
+}
+ul li{
+    list-style: none;
+}
+.clear::after{
+    clear: both;
+    display: block;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+
+.top-nav{  
+  background-color:#394043;
+  display: flex;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+}
+.top-nav1{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+}
+.top-nav2{
+     width: 40%;
+     text-align: right;
+}
+.top-nav2 i{
+    vertical-align: -1px;
+    display: inline-block;
+    background-image:url(../images/findhome/1.png);
+    background-position: -518px -173px;
+    width: 12px;
+    height: 12px;
+    margin-right: 9px;
+}
+.top-middle{
+     height: 154px;
+     background-color: #f5f5f6;
+     padding-left: 100px;
+}
+.top-middle .menu{
+ 
+    height: 84px;
+    line-height: 84px;
+}
+.menu li{
+    padding-right: 20px;
+}
+.top-footer{
+    margin-left: 100px;
+    font-size: 12px;
+}
+.top-footer .position{
+    border-bottom: 1px solid gray;
+    width: 90%;
+    height: 80px;
+    line-height: 80px;
+    font-weight: 900;
+}
+.position a{
+   color: green;
+   padding-left: 20px;
+}
+.place{
+    width: 90%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom:1px solid  gray;
+}
+.place ul{
+    padding-left: 45px;
+}
+.place ul li{
+    float: left;
+    padding-right: 20px;
+}
+.price {
+    width: 90%;
+    height: 30px;
+    line-height: 30px; 
+    border-bottom: 1px solid gray;
+    float: left;
+    position: relative;
+}
+.price-s{
+    font-weight: 900;
+    position: absolute;
+    top: -2px;
+}
+
+.price ul{
+    display: inline-block;
+    width: 80%;
+    
+}
+.price ul li{
+    padding-left: 50px;
+    float: left;
+    position: relative;
+}
+.price ul li a{
+    color: #394043;
+    text-decoration: none;
+}
+.price .checkbox{
+    position: absolute;
+    left: 45px;
+    top: 8px;
+    padding-left: 10px;
+}
+.price .name{
+    padding-left: 10px;
+}
+.content{
+    width: 83%;
+    margin-left: 100px;
+    padding-top: 30px;
+}
+.sort-by {
+    margin-top: 30px;
+}
+
+.sort-by ul {
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid #00ae66;
+}
+
+.sort-by ul li {
+    padding: 10px 20px;
+}
+
+.sort-by ul li a {
+    color: #333;
+}
+
+.sort-by ul li a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.sort-by ul li.active {
+    background: #00ae66;
+    color: #fff;
+}
+.sale-num {
+    color: #1f99f4;
+    font-weight: 700;
+    font-style: italic;
+}
+.twice-home-item {
+    border-bottom: 1px solid #eee;
+    justify-content: space-between;
+    padding:20px 0;
+}
+
+.twice-home-item .twice-home-img {
+    width: 232px;
+    height: 174px;
+    padding:0 !important;
+}
+
+.twice-home-item .twice-home-img img {
+    width: 100%;
+    height: 100%;
+}
+.twice-home-detail {
+    justify-content: space-between;
+}
+
+.twice-home-detail h4 {
+    line-height: 22px;
+    font-size: 0;
+    line-height: 22px;
+    height: 22px;
+}
+
+.twice-home-detail h4 a {
+    color: #999;
+    font-weight: bold;
+    font-size: 22px;
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    max-width:430px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.twice-home-icon {
+    background-image: url(../images/sprite.png);
+    background-position: -441px -220px;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: -1px;
+    margin-right: 12px;
+}
+
+.twice-home-icon.icon2 {
+    background-position: -398px -238px;
+}
+
+.twice-home-icon.icon3 {
+    background-position: -552px -130px;
+}
+.footer{
+     width: 1000px;
+     height: 50px;
+     margin: 0 auto;
+}
+.footer nav{
+    margin-top: 5px;
+    margin-left: 400px;
+}

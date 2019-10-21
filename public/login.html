@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+    
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./third/bootstrap.min.css">
+    <script src="./third/jquery.min.js"></script>
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="./third/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/user.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="banner d-flex">
+            <ul class="nav-list d-flex">
+                <li>
+                    <a href="javascript:;">用户登录</a>
+                </li>
+            </ul>
+            <div class="user-option">
+                <a class="fs12 col3" href="index.html">首页</a>
+                <span class="seperator col9">|</span>
+                <a class="fs12 col3" href="register.html">注册</a>
+            </div>
+        </div>
+
+        <div class="register-form">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">账号</span>
+                </div>
+                <input type="text" class="form-control" id="account" placeholder="用户名/邮箱" aria-label="Username" aria-describedby="basic-addon1"
+                    required>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">密码</span>
+                </div>
+                <input type="password" class="form-control" id="password" placeholder="密码" aria-describedby="basic-addon3" required>
+            </div>
+
+            <div class="form-group mt20 text-center">
+                <button type="button" id="btnSubmit" class="btn btn-primary" style="padding:10px 50px;">登录</button>
+            </div>
+
+        </div>
+        <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        用户名或密码错误
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#btnSubmit").click(function () {
+            var account = $("#account").val();
+            var password = $("#password").val();
+            $.ajax({
+                url: "/users/login",
+                data: {
+                    account,
+                    password
+                },
+                method: "POST",
+                success: function (data) {
+                    if (data.code != 200) {
+                        $("#error").modal("show");
+                        return;
+                    }
+                    $.cookie("user", JSON.stringify(data.user), { expires: 1, path: "/" })
+                    location.href = "index.html"
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

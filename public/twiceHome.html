@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二手房</title>
+    
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./third/bootstrap.min.css">
+    <script src="./third/jquery.min.js"></script>
+    <script src="./third/jquery.cookie.min.js"></script>
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/template-web.js"></script>
+    <script src="./third/purl.min.js"></script>
+    <script src="./third/moment-with-locales.js"></script>
+    <script src="./js/common/utils.js"></script>
+    <link rel="stylesheet" href="./third/font-awesome/css/font-awesome.min.css">
+    <style>
+        .user-option a{
+            color:#fff !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="banner d-flex banner-bg">
+            <ul class="nav-list d-flex">
+                <li>
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <a href="twiceHome.html">二手房</a>
+                </li>
+                <li class="">
+                    <a href="newHome.html">新房</a>
+                </li>
+                <li class="">
+                    <a href="zufang.html">租房</a>
+                </li>
+                <li class="">
+                    <a href="fabuHome.html" target="_blank">发布房源</a>
+                </li>
+            </ul>
+            <div class="user-option d-flex">
+                <input type="text" class="form-control" name="" id="keywords" aria-describedby="helpId" placeholder="">
+                <i class="fa fa-search btn btn-sm btn-outline-secondary" id="btnSearchKeywords" style="padding:10px;margin-right:10px;cursor: pointer;"
+                    aria-hidden="true"></i>
+                <a class="btn btn-sm btn-outline-secondary" href="login.html">登录</a> 
+                &nbsp;
+                <a class="btn btn-sm btn-outline-secondary" href="register.html">注册</a>
+            </div>
+        </div>
+        <div class="m-filter">
+            <div class="filter-list fs12">
+                <dl class="list-item">
+                    <dt>位置</dt>
+                    <dd>
+                        <a href="javascript:;" class="diqu weizhi-tab active">区域
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:;" class="ditie weizhi-tab">小区
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                        <button type="reset" class="btn btn-outline-secondary pull-right right" id="resetBtn">重置</button>
+                        <em class="pull-right">
+                            选中的 区域：
+                            <span id="cityActive" style="display: inline-block;width:60px;"></span>
+                            小区：
+                            <span id="xiaoquActive" style="display: inline-block;width:60px;"></span>
+                        </em>
+
+                        <div>
+                            <div class="weizhi-list" id="city"></div>
+                            <script id="city_temp" type="text/html">
+                                {{each cities c}}
+                                <a class="city_a" href="javascript:;" data-id="{{c.id}}">{{c.name}}</a>
+                                {{/each}}
+                            </script>
+
+                            <!-- 小区 -->
+                            <div class="weizhi-list hidden" id="xiaoqu"></div>
+                            <script id="xiaoqu_temp" type="text/html">
+                                {{each xiaoqu x}}
+                                <a class="xiaoqu_a" href="javascript:;" data-id="{{x.id}}">{{x.name}}</a>
+                                {{/each}}
+                            </script>
+
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="list-item">
+                    <dt title="郑州售价在售二手房">售价</dt>
+                    <dd>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value="< 60">
+                            <label for="checkbox">60万以下</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" between 60 and 80 ">
+                            <label for="checkbox">60-80万</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" between 80 and 100 ">
+                            <label for="checkbox">80-100万</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" between 10 and 150 ">
+                            <label for="checkbox">100-150万</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" between 150 and 200 ">
+                            <label for="checkbox">150-200万</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" between 200 and 300 ">
+                            <label for="checkbox">200-300万</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" between 300 and 400 ">
+                            <label for="checkbox">300-400万</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="sale-price" type="checkbox" value=" > 400 ">
+                            <label for="checkbox">400万以上</label>
+                        </a>
+                    </dd>
+                </dl>
+                <dl class="list-item">
+                    <dt title="郑州面积在售二手房">面积</dt>
+                    <dd>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" < 50 ">
+                            <label for="checkbox">50平以下</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" between 50 and 70 ">
+                            <label for="checkbox">50-70平</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" between 70 and 90 ">
+                            <label for="checkbox">70-90平</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" between 90 and 110 ">
+                            <label for="checkbox">90-110平</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" between 110 and 130 ">
+                            <label for="checkbox">110-130平</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" between 130 and 150 ">
+                            <label for="checkbox">130-150平</label>
+                        </a>
+                        <a href="/" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" between 150 and 200 ">
+                            <label for="checkbox">150-200平</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="area" type="checkbox" value=" > 200 ">
+                            <label for="checkbox">200平以上</label>
+                        </a>
+                    </dd>
+                </dl>
+                <dl class="list-item">
+                    <dt title="郑州房型在售二手房">房型</dt>
+                    <dd>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="roomType" type="checkbox" value=" = 1">
+                            <label for="checkbox">一室</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="roomType" type="checkbox" value=" = 2">
+                            <label for="checkbox">二室</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="roomType" type="checkbox" value=" = 3">
+                            <label for="checkbox">三室</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="roomType" type="checkbox" value=" = 4">
+                            <label for="checkbox">四室</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="roomType" type="checkbox" value=" = 5">
+                            <label class="roomType" for="checkbox">五室</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="roomType" type="checkbox" value=" > 5">
+                            <label for="checkbox">五室以上</label>
+                        </a>
+                    </dd>
+                </dl>
+                <dl class="list-item more-item hidden">
+                    <dt title="郑州标签在售">标签</dt>
+                    <dd>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="special" type="checkbox" value="地铁">
+                            <label for="checkbox">地铁边</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="special" type="checkbox" value="学区">
+                            <label for="checkbox">学区房</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="special" type="checkbox" value="新装">
+                            <label for="checkbox">新装修</label>
+                        </a>
+                    </dd>
+                </dl>
+                <dl class="list-item more-item hidden">
+                    <dt title="">用途</dt>
+                    <dd>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="type" type="checkbox" value="住宅">
+                            <label for="checkbox">普通住宅</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="type" type="checkbox" value="别墅">
+                            <label for="checkbox">别墅</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="type" type="checkbox" value="商业">
+                            <label for="checkbox">商业</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="type" type="checkbox" value="写字楼">
+                            <label for="checkbox">写字楼</label>
+                        </a>
+                        <a href="javascript:;" class="" rel="nofollow">
+                            <input class="type" type="checkbox" value="底商">
+                            <label for="checkbox">底商</label>
+                        </a>
+                    </dd>
+                </dl>
+                <div class="text-center fs12 col9 showmoreitem btn btn-sm btn-block btn-secondary" style="width:100%;cursor: pointer;">显示/隐藏更多
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </div>
+                <button type="button" name="" id="btnSubmit" class="btn btn-secondary btn-sm btn-block">确定</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sort-by">
+                <ul class="d-flex">
+                    <li class="sortby-list active" data-sort="viewNum">默认排序</li>
+                    <li class="sortby-list" data-sort="registerTime">最新</li>
+                    <li class="sortby-list" data-sort="price">总价</li>
+                    <li class="sortby-list" data-sort="perPrice">平方单价</li>
+                    <li class="sortby-list" data-sort="area">总面积</li>
+                </ul>
+            </div>
+            <h4 class="fb mt20">共找到
+                <span class="sale-num" id="totalNum"></span> 符合信息</h4>
+            <hr class="line">
+            <div class="twice-home-list" id="houseList"> </div>
+            <script type="text/html" id="houseList_temp">
+                {{each houses h}}
+                <div class="twice-home-item d-flex">
+                    <div class="twice-home-img col-md-3">
+                        <a href="./bhome.html?id={{h.id}}">
+                            <img src="{{h.img}}" onerror="null;src='./images/default_pic3.jpg'" alt="">
+                        </a>
+                    </div>
+                    <div class="twice-home-detail fs14 d-flex col-md-9">
+                        <div>
+                            <h4 class="mb20">
+                                <a href="./bhome.html?id={{h.id}}" class="mr10">{{h.cname}}{{h.cmname}} {{h.roomType}}室{{h.hallType}}厅 {{h.price}}万</a>
+                                <span class="tips fs14">新上</span>
+                            </h4>
+                            <p>
+                                <i class="twice-home-icon icon1"></i>{{h.cname}}{{h.cmname}} | {{h.roomType}}室{{h.hallType}}厅 | {{h.area}}平米 | {{h.special}}</p>
+                            <p>
+                                <i class="twice-home-icon icon2"></i>{{h.cmname}}</p>
+                            <p>
+                                <i class="twice-home-icon icon3"></i>{{h.registerTime | dateFormat "YYYYMMDD" }}</p>
+                        </div>
+                        <div class="twice-home-price text-right mt20">
+                            <h3 class="fs14 coldarkred">
+                                <span class="fs32 fb mr10">{{h.price}}</span>万</h3>
+                            <p class="twice-home-per-price">单价
+                                <span>{{h.price/h.area | priceFormat "￥"}}</span> 元/平米</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </script>
+        </div>
+    </div>
+    <script>
+        var condation = {
+            cityId: "",
+            communityId: "",
+            price: [],
+            area: [],
+            roomType: [],
+            special: [],
+            type: [],
+            orderby: "",
+            keywords: "",
+            operateType: 2,
+        };
+        function setLogin() {
+            var userInfo = $.cookie("user");
+            if (userInfo) {
+                var userInfo = JSON.parse(userInfo);
+                $(".user-option").html(`
+                <input type="text" class="form-control" name="" id="keywords" aria-describedby="helpId" placeholder="">
+                <i class="fa fa-search btn btn-sm btn-outline-secondary" id="btnSearchKeywords" style="padding:10px;margin-right:10px;cursor: pointer;"
+                    aria-hidden="true"></i>
+                <a class="btn btn-sm btn-outline-secondary" style="" href="javascript:;">欢迎${userInfo.trueName || userInfo.account}</a>
+                    <a class="btn btn-sm btn-outline-secondary" style="" href="${location.href}" onclick="logout()">退出</a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user","",{expires:-1});
+        }
+        setLogin();
+        function getCity() {
+            $.get("/xiaoqu/getCity").done(data => {
+                $("#city").html(template("city_temp", { cities: data.cities }))
+                $(".city_a").each(function (i, v) {
+                    $(v).click(function () {
+                        condation.cityId = $(v).data("id");
+                        console.log(condation);
+                        $(this).addClass("active").siblings().removeClass("active");
+                        $("#cityActive").html($(this).text())
+                    })
+                })
+            })
+        }
+        function getXiaoqu() {
+            $.get("/xiaoqu/getXiaoqu").done(data => {
+                $("#xiaoqu").html(template("xiaoqu_temp", { xiaoqu: data.communities }))
+                $(".xiaoqu_a").each(function (i, v) {
+                    $(v).click(function () {
+                        condation.communityId = $(v).data("id");
+                        console.log(condation);
+                        $(this).addClass("on").siblings().removeClass("on");
+                        $("#xiaoquActive").html($(this).text())
+                    })
+                })
+            })
+        }
+
+        // function search(condation, operateType, keywords) {
+        //     $.post("/search", {
+        //         condation: JSON.stringify(condation),
+        //         operateType: operateType,
+        //         keywords: keywords
+        //     }).done(data => {
+        //         console.log(data);
+        //     }).fail(err => {
+        //         throw err;
+        //     })
+        // }
+        function search(condation) {
+            $.post("/search", {
+                condation: JSON.stringify(condation),
+            }).done(data => {
+                console.log(data);
+                if (data.code != 200) {
+                    $("#houseList").html("没有找到对应的房源信息");
+                    return;
+                }
+                $("#houseList").html(template("houseList_temp", { houses: data.houses }));
+                $("#totalNum").text(data.houses.length)
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            getCity();
+            getXiaoqu();
+            // search(condation, operateType, keywords)
+            search(condation)
+            $(".weizhi-tab").each(function (i, v) {
+                $(v).click(function () {
+                    $(".weizhi-list").eq(i).removeClass("hidden").siblings().addClass("hidden");
+                    $(v).addClass("active").siblings().removeClass("active");
+                })
+            })
+            $(".btn-showmore").each(function (i, v) {
+                $(v).click(function () {
+                    $(".downFilter").eq(i).slideToggle();
+                })
+            })
+            $(".showmoreitem").click(function () {
+                $(".more-item").each(function (i, v) {
+                    $(v).toggleClass("hidden");
+                })
+            })
+            $(".sortby-list").each(function (i, v) {
+                $(v).click(function () {
+                    $(this).addClass("active").siblings().removeClass("active");
+                    condation.orderby = $(this).data("sort")
+                    console.log(condation)
+                    // search(condation,operateType,keywords);
+                    search(condation);
+                })
+            })
+            $(".sale-price").each(function (i, v) {
+                $(v).click(function () {
+                    var val = $(v).val();
+                    if (condation.price.indexOf(val) == -1) {
+                        if ($(v).prop("checked")) {
+                            condation.price.push(val);
+                        }
+                    } else {
+                        if (!$(v).prop("checked")) {
+                            condation.price.splice(condation.price.indexOf(val), 1);
+                        }
+                    }
+                    console.log(condation)
+                })
+            })
+            $(".area").each(function (i, v) {
+                $(v).click(function () {
+                    var val = $(v).val();
+                    if (condation.area.indexOf(val) == -1) {
+                        if ($(v).prop("checked")) {
+                            condation.area.push(val);
+                        }
+                    } else {
+                        if (!$(v).prop("checked")) {
+                            condation.area.splice(condation.area.indexOf(val), 1);
+                        }
+                    }
+                    console.log(condation)
+                })
+            })
+            $(".roomType").each(function (i, v) {
+                $(v).click(function () {
+                    var val = $(v).val();
+                    if (condation.roomType.indexOf(val) == -1) {
+                        if ($(v).prop("checked")) {
+                            condation.roomType.push(val);
+                        }
+                    } else {
+                        if (!$(v).prop("checked")) {
+                            condation.roomType.splice(condation.roomType.indexOf(val), 1);
+                        }
+                    }
+                    console.log(condation)
+                })
+            })
+            $(".special").each(function (i, v) {
+                $(v).click(function () {
+                    var val = $(v).val();
+                    if (condation.special.indexOf(val) == -1) {
+                        if ($(v).prop("checked")) {
+                            condation.special.push(val);
+                        }
+                    } else {
+                        if (!$(v).prop("checked")) {
+                            condation.special.splice(condation.special.indexOf(val), 1);
+                        }
+                    }
+                    console.log(condation)
+                })
+            })
+            $(".type").each(function (i, v) {
+                $(v).click(function () {
+                    var val = "'" + $(v).val() + "'";
+                    if (condation.type.indexOf(val) == -1) {
+                        if ($(v).prop("checked")) {
+                            condation.type.push(val);
+                        }
+                    } else {
+                        if (!$(v).prop("checked")) {
+                            condation.type.splice(condation.type.indexOf(val), 1);
+                        }
+                    }
+                    console.log(condation)
+                })
+            })
+            $("#btnSubmit").click(function () {
+                // search(condation, operateType, keywords);
+                search(condation);
+            })
+            $("#btnSearchKeywords").click(function () {
+                condation.keywords = $("#keywords").val() || "";
+                search(condation);
+            })
+            $("#resetBtn").click(function () {
+                condation = {
+                    cityId: "",
+                    communityId: "",
+                    price: [],
+                    area: [],
+                    roomType: [],
+                    special: [],
+                    type: [],
+                    orderby: "",
+                    keywords: "",
+                    operateType: 2,
+                };
+                search(condation)
+            })
+        })
+    </script>
+</body>
+
+</html>

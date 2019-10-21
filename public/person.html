@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>经纪人</title>
+    
+    <link rel="stylesheet" href="./css/person.css">
+    <link rel="stylesheet" href="./third/bootstrap.min.css">
+    <script src="./third/jquery.min.js"></script>
+    <script src="./third/bootstrap.min.js"></script>
+    <script src="./third/template-web.js"></script>
+    <link rel="stylesheet" href="./third/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="top-nav" role="navigation">
+        <ul class="nav nav-tabs top-nav1">
+            <li role="presentation">
+                <a href="index.html">首页</a>
+            </li>
+            <li role="presentation" class="active">
+                <a href="twiceHome.html">二手房</a>
+            </li>
+            <li role="presentation">
+                <a href="newHome.html">新房</a>
+            </li>
+            <li role="presentation">
+                <a href="newHome.html">租房</a>
+            </li>
+            <li role="presentation">
+                <a href="xiaoqu.html">小区</a>
+            </li>
+            <li role="presentation">
+                <a href="person.html">经纪人</a>
+            </li>
+            <li role="presentation">
+                <a href="baike.html">百科</a>
+            </li>
+            <li role="presentation">
+                <a href="fabuHome.html">发布房源</a>
+            </li>
+        </ul>
+        <div class="top-nav2">
+            <i></i>
+            <a href="login.html" id="loginBtn" rel="nofollow">登录</a>
+            <span>/</span>
+            <a href="register.html" id="registerBtn" rel="nofollow">注册</a>
+        </div>
+    </div>
+    <div class="person clear" id="person">
+        <script type="text/html" id="person_temp">
+            <span class="number">共有
+                <span> {{persons.length}} </span>名经纪人</span>
+            {{each persons p}}
+            <div class="twice-home-item d-flex">
+                <div class="twice-home-img col-md-3">
+                    <img src="./images/person/2.jpg"  alt="">
+                </div>
+                <div class="twice-home-detail fs14 d-flex col-md-9">
+                    <div>
+                        <h4 class="mb20">
+                            <a href="#" class="mr10">{{p.name}}</a>
+                        </h4>
+                        <p>
+                            主营板块：{{p.manage}}</p>
+                        <p>
+                            带看：{{p.viewNum}}次</p>
+                        <p>
+                            {{p.header}}</p>
+                    </div>
+                    <div class="twice-home-price text-right mt20">
+                        <h3 class="fs14 coldarkred">
+                            客户评分：{{p.score}}
+                        </h3>
+                    </div>
+                    <div class="twice-home-price text-right mt20">
+                        <h3 class="fs14 coldarkred">{{p.phone}}
+                            <p class="twice-home-per-price lianxi">联系方式</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </script>
+    </div>
+    <script src="./third/jquery.cookie.min.js"></script>
+    <script>
+        function setLogin() {
+            var userInfo = $.cookie("user");
+            if (userInfo) {
+                var userInfo = JSON.parse(userInfo);
+                $(".top-nav2").html(`
+                <i></i>
+                <a href="javascript:;" rel="nofollow">欢迎${userInfo.trueName || userInfo.account}</a>
+                <span>/</span>
+                <a href="${location.href}" rel="nofollow" onclick="logout()">退出</a>
+                `)
+            }
+        }
+        function logout() {
+            $.cookie("user", "", { expires: -1 });
+        }
+        setLogin();
+        function getPerson() {
+            $.get("/person/getPerson").done(data => {
+                console.log(data)
+                $("#person").html(template("person_temp", { persons: data.persons }))
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            getPerson();
+        })
+    </script>
+</body>
+
+</html>
